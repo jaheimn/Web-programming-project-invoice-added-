@@ -1,0 +1,43 @@
+body {
+    color: wheat;
+    background-color: black; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    border-bottom: 1px solid wheat;
+    margin-bottom: 9px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-align: center;
+    margin-top: 50px; 
+}
+
+div {
+    text-align: center;
+}
+
+.error-container {
+    padding: 20px;
+    background-color: rgba(128, 128, 128, 0.136); 
+    border: 1px solid wheat;
+    margin: auto;
+    width: fit-content;
+    margin-top: 100px; 
+    border-radius: 10px; 
+}
+
+.back-link {
+    color: wheat;
+    text-decoration: none;
+    font-size: larger;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}

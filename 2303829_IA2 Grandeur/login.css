@@ -1,0 +1,69 @@
+body {
+    color: wheat;
+    background-color: black; 
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+#whole {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full height of the viewport */
+}
+
+.forms {
+    background-color: rgba(128, 128, 128, 0.2);
+    border: 1px solid wheat;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px; /* Fixed width for the form */
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px; /* Spacing between labels and inputs */
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%; /* Full width inputs */
+    padding: 10px;
+    margin-bottom: 15px; /* Spacing below inputs */
+    border: 1px solid wheat;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: wheat;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: wheat; /* Highlight border on focus */
+}
+
+button {
+    background-color: wheat;
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: rgba(255, 255, 255, 0.8); /* Lighten button on hover */
+}
+
+#error-message {
+    color: red;
+    margin-top: 10px;
+    font-size: 0.9em;
+}

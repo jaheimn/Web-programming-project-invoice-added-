@@ -1,0 +1,205 @@
+body{
+    color: wheat;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    position: relative;
+    margin-top: 0;
+    color: wheat;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+h1{
+    border-bottom: 1px solid wheat;
+    margin-bottom:9px ;
+    font-family:Georgia, 'Times New Roman', Times, serif;
+}
+nav{
+    position: relative;
+    top:0px;
+    background-color: none;
+    width: 100%;
+    position: sticky;
+    height: 50px;
+    margin-top: 0px;
+    border-bottom: 1px solid wheat;
+}
+
+#overview{
+    text-align: center;
+    word-spacing: 1px;
+    border: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: large;
+    background-color: rgba(128, 128, 128, 0.136);
+}
+
+div{
+    border: 1px solid wheat;
+}
+
+.choice{
+    margin: auto;
+    margin-top:50px ;
+    width: max-content;
+    height: fit-content;
+    padding: 20px;
+    display: flex;
+
+}
+
+.suits{
+    padding: 10px;
+    margin: 20px;
+    height: fit-content;
+    width: fit-content;
+    text-align: center;
+    background: none;
+    border: none;
+    color: wheat;
+}
+
+.image{
+    height: 500px;
+    width: 400px;
+    
+}
+
+
+.suits:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: 600ms;
+    
+}
+
+
+#market{
+    margin: auto;
+    padding: 30px;
+    margin-top: 50px;
+    width: fit-content;
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    gap:70px;
+    
+}
+
+img{
+    height: 300px;
+    width: 200px;
+}
+
+.addBtn{
+    border: solid 1px wheat;
+    background: none;
+    color: wheat;
+}
+
+.addBtn:hover{
+    background-color:wheat ;
+    color: black;
+    transition: 500ms;
+    cursor: pointer;
+}
+
+.product{
+    height:fit-content;
+    width: fit-content;
+    padding: 15px;
+    border: 1px solid wheat;
+}
+
+
+
+.action{
+    height: fit-content;
+    text-align: center;
+    margin:10px;
+   
+}
+
+.appear{
+    height: fit-content;
+    text-align: center;
+    margin:10px;
+}
+
+
+.product:hover{
+    translate:0px -10px;
+    box-shadow: 10px 10px rgba(196, 184, 119, 0.3);
+    transition: 300ms;
+}
+
+@keyframes appearing{
+    0%{right: 0px; top:800px; opacity: 0;}
+    100%{right: 0px; top:0px; opacity: 1;}
+}
+.cart{
+
+    display: none;
+    width: 400px;
+    height: 600px;
+    position: absolute;
+    top:0px;
+    right:0px;
+    background-color: white;
+    border-radius: 10px;
+    margin-right: 5px;
+    animation-name: appearing;
+    animation-duration: 3s;
+    text-align: center;
+    z-index: 10;
+    color: black;
+    text-align: center;
+    
+}
+
+.hide{
+    display: none;
+}
+
+.info{
+    position: absolute;
+    bottom: 10px;
+    width: fit-content;
+    height: fit-content;
+}
+
+.seeCart{
+    background: none;
+    color: wheat;
+    font-size: larger;
+    border: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+
+}
+
+.seeCart:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.about{
+    background: none;
+    color: wheat;
+    font-size: larger;
+    border: none;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.about:hover{
+    text-decoration: underline;
+    cursor: pointer;
+
+}
