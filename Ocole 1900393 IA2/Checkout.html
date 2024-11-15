@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    
+</head>
+<style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+	justify-content: center;      
+	margin: 0;                    
+	text-align: center;          
+	
+    background-color: rgb(5, 159, 220);
+}
+
+.header {
+    background-color: #253b84;
+    text-align: center; 
+	border-bottom: 1px solid #f0f0f0;
+	padding: 20px 40px;
+}
+
+.header-button {
+    display: inline-block; 
+    background-color: #08041a;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 10px; 
+    border: none;
+    cursor: pointer;
+}
+
+.header-button:hover {
+    background-color: #45a049;
+}
+
+</style>
+<body>
+
+   
+     <div class="invoice">
+        <h3>Confirm your Selection</h3>
+        <ul id="invoiceItems">
+        </ul>
+        <p><strong>Total:</strong> $<span id="totalPrice">0</span></p>
+    </div>
+    
+
+    
+    <button onclick="confirmCheckout()">Confirm</button>
+    <button onclick="exitCheckout()">Exit</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const shoppingList = JSON.parse(localStorage.getItem('shoppingList')) || [];
+            const shoppingListElement = document.getElementById('shoppingList');
+
+            shoppingList.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.onclick = function() {
+                    removeItem(item);
+                };
+                li.appendChild(removeButton);
+                shoppingListElement.appendChild(li);
+            });
+        });
+
+        function removeItem(item) {
+            let shoppingList = JSON.parse(localStorage.getItem('shoppingList')) || [];
+            shoppingList = shoppingList.filter(i => i !== item);
+            localStorage.setItem('shoppingList', JSON.stringify(shoppingList));
+            location.reload(); 
+        }
+
+        function confirmCheckout() {
+            alert('Your order has been confirmed.');
+            localStorage.removeItem('shoppingList'); 
+            window.location.href = 'index.html'; 
+        }
+
+        function exitCheckout() {
+            window.location.href = 'index.html'; 
+        }
+         
+        const storedItems = JSON.parse(localStorage.getItem("invoiceItems"));
+        const total = localStorage.getItem("totalPrice");
+
+    
+        const shoppinglistItem = document.getElementById("invoiceItems");
+        const totalPriceDisplay = document.getElementById("totalPrice");
+
+    
+         if (storedItems && total) {
+             storedItems.forEach(item => {
+                    const listItem = document.createElement('li');
+                  listItem.textContent = `${item.name} - $${item.price}`;
+                  shoppinglistItem.appendChild(listItem);
+              });
+
+        totalPriceDisplay.textContent = total;
+        } else {
+        shoppinglistItem.innerHTML = '<li>No items selected.</li>';
+    }
+    </script>
+
+</body>
+</html>
+

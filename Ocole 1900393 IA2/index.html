@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style - Copy.css">
+    <title>Vaccination Services</title>
+    
+</head>
+<body>
+   
+    <header class="header">
+        <h1 class="logo">Vaccination Services</h1>
+        <a href="./Login.html">
+            <button class="header-button">Login</button>
+        </a>
+        <a href="./Login.html">   
+            <button class="header-button">Logout</button>
+        </a>
+       
+        <a href="D:\Ocole 1900393 IA2\about_us.html">
+            <button class="header-button">Learn More</button>
+        </a>
+        <button class="header-button" onclick="goToCheckout()">Go to Checkout</button>
+    
+    </header>
+    <body>
+        <div class="item">
+            <img class="itemImg" src="./assets/1-capv.jpg" alt="Capavaxive" onclick="addItem('Capavaxive ', 300)">
+            <p class="imgLabel">Capavaxive - $300</p>
+            <p>Vaccine for Pneumonia.</p>
+        </div>
+        
+        <div class="item">
+            <img class="itemImg" src="./assets/2-energ.png" alt="ENERGIX-B" onclick="addItem('ENERGIX-B ', 150)">
+            <p class="imgLabel">ENERGIX-B - $150</p>
+            <p> Immunization agains Hepatitis-B.</p>
+        </div>
+        
+        <div class="item">
+            <img class="itemImg" src="./assets/3-rotar.jpg" alt="Rotarix Oral Applicator" onclick="addItem('Rotarix Oral Applicator ', 200)">
+            <p class="imgLabel">Rotarix Oral Applicator - $200</p>
+            <p>Live, Suspension, for Oral Use</p>
+        </div>
+        <div class="item">
+            <img class="itemImg" src="./assets/4-rotateq.jpg" alt="" onclick="addItem('Rotateq ', 300)">
+            <p class="imgLabel">Rotateq - $300</p>
+            <p>>Live, Suspension, Pentavalent</p>
+        </div>
+        <div class="item">
+            <img class="itemImg" src="./assets/5-varivax.jpg" alt="" onclick="addItem('Varivax ', 500)">
+            <p class="imgLabel">-Varivax $500</p>
+            <p>Chickenpox Vaccine</p>
+        </div>
+        <div class="item">
+            <img class="itemImg" src="./assets/6-mmr.jpg" alt="" onclick="addItem('M-M-R-II ', 250)">
+            <p class="imgLabel">M-M-R-II $250</p>
+            <p>Measles, Mumps, Rubella</p>
+        </div>
+        <div class="item">
+            <img class="itemImg" src="./assets/7-arevxy.png" alt="" onclick="addItem('AREVXY ', 280)">
+            <p class="imgLabel">AREVXY- $280</p>
+            <p>R-S-V Vaccine </p>
+        </div>
+        <div class="item">
+            <img class="itemImg" src="./assets/8-priorix.png" alt="" onclick="addItem('Priorix ', 370)">
+            <p class="imgLabel">Priorix - $370</p>
+            <p>Measles, Mumps, Rubella</p>
+        </div>
+        <div class="item">
+            <img class="itemImg" src="./assets/9-bexsero.png" alt="" onclick="addItem('Bexsero ', 220)">
+            <p class="imgLabel">-Bexsero $220</p>
+            <p>For men</p>
+        </div>
+        
+        
+    
+        
+    <script>
+     
+    let shoppingList = [];
+
+
+    function addItem(name, price) {
+    shoppingList.push({ name: name, price: price });
+    alert(name + "has been added to Shopping List.");
+}
+
+
+    function goToCheckout() {
+    localStorage.setItem("invoiceItems", JSON.stringify(shoppingList));
+    let total = shoppingList.reduce((sum, item) => sum + item.price, 0);
+    localStorage.setItem("totalPrice", total);
+
+    window.location.href = 'Checkout.html';
+}
+    const storedItems = JSON.parse(localStorage.getItem("invoiceItems"));
+    const total = localStorage.getItem("totalPrice");
+
+    const shoppinglistItem = document.getElementById("invoiceItems");
+    const totalPriceDisplay = document.getElementById("totalPrice");
+
+    if (storedItems && total) {
+        storedItems.forEach(item => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.name} - $${item.price}`;
+            shoppinglistItem.appendChild(listItem);
+        });
+
+        totalPriceDisplay.textContent = total;
+    } else {
+        shoppinglistItem.innerHTML = '<li>No items selected.</li>';
+    }
+
+    </script>
+
+    
+
+</body>
+</html>

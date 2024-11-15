@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'><link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Login</h2>
+        </div>
+        <form id="form" class="form">
+            <div class="form-control">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Ocole1" id="username" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="email">Email</label>
+                <input type="email" placeholder="example@gmail.com" id="email" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <div class="form-control">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password must be 8 charachters long" id="password" pattern=".{8,}" required/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+          
+                <button onclick="redirectToPage()" >Submit</button>
+            
+        </form>    
+            
+            <script>
+                 function retrieveData() {
+                    
+                    const name = localStorage.getItem('name');
+                    const email = localStorage.getItem('email');
+                    const password = localStorage.getItem('password');
+        
+                    if (name && email && password) {
+                        alert(`Name: ${name}\nEmail: ${email}\nPassword: ${password}`);
+                    } else {
+                        alert('You must Register');
+                    }
+                }
+                function redirectToPage() {
+            event.preventDefault();
+            window.location.href = "index.html";
+        }
+            </script>
+            <script  src=".\Registervalid.js"></script>
+            <script src=".\Loginattempts.js"></script>
+            
+    
+</body>
+</html>
