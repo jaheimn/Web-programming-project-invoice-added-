@@ -14,11 +14,11 @@
         <form id="form" class="form">
             <div class="form-control" id="trn_input">
                 <label for="trn">Enter a Valid TRN</label>
-                <input type="number" placeholder="(000-000-000)" id="trn" pattern="^\d{9}$" required maxlength="9"/>
+                <input type="text" placeholder="(000-000-000)" id="trn" pattern="^\d{9}$" required maxlength="9"/>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
-                <button id="changeInput">Use email</button>
+               
             </div>
             
             <div class="form-control" id="email_input" style="display: none;">
@@ -29,22 +29,25 @@
                 <small>Error message</small>
             </div>
 
+                <button type="button" id="changeInput">Use email</button>
+
             <div class="form-control" id="password_input">
                 <label for="password">Password</label>
                 <input type="password" placeholder="Password must be 8 charachters long" id="password" pattern=".{8,}" required/>
                 <i class="fas fa-check-circle"></i>
                 <i class="fas fa-exclamation-circle"></i>
-                <small>Error message</small>
-            </div>
+                <small id="check">Password must be at least 8 characters long.</small>           
+             </div>
 
-                <button id="loginBtn">Login</button>
-                <button id="reset" onclick="reset()">reset</button>
+                <button type="submit" id="loginBtn">Login</button>
+                <button type="button" id="reset" onclick="reset()">Reset</button>
         </form>    
             
             <script>
 
-                const defTrn = 123456789;
+                const defTrn = "123456789";
                 const passkey = "Password";
+                const defEmail = "name1234@email.com"
 
                 let fail_counter = 0;
 
@@ -56,45 +59,79 @@
                 function getitem(item) {
                     return JSON.parse(localStorage.getItem(item));
                 }
+               
+                
+
+                //toggle between email and trn input
+               document.getElementById("changeInput").addEventListener("click", function(){
+               // e.preventDefault();
+                //document.getElementById("trn_input").style.display='block';
+                   
+                    if(document.getElementById("trn_input").style.display == 'none'){
+
+                        document.getElementById("trn_input").style.display='block';
+                        document.getElementById("email_input").style.display='none';
+                        document.getElementById("changeInput").innerHTML = 'Use E-mail';
+
+                    }else{
+
+                        document.getElementById("trn_input").style.display='none';
+                        document.getElementById("email_input").style.display='block';
+                        document.getElementById("changeInput").innerHTML = 'Use TRN#';
+                    }
+                    });
+                
+                    //password validation- check for minimum length
+                document.getElementById("password").addEventListener("input", function() {
+                    const pass = document.getElementById("password").value;
+                    const checkMessage = document.getElementById("check");
+                    const loginButton = document.getElementById("loginBtn");
+
+                    if (pass.length >= 8) {
+                        checkMessage.style.display = 'none';
+                        loginButton.disabled = false;  // enable login button
+                    } else {
+                        checkMessage.style.display = 'block';
+                        loginButton.disabled = true;  // disable login button
+                    }
+                });
 
 
-               document.getElementById("changeInput").onclick = function useEmail(){
-                    document.getElementById("trn_input").style.display='none';
-                    document.getElementById("email_input").style.display='inline-block';
-                }
-
-
-                document.getElementById("loginBtn").onclick = function(e) {
-                    e.preventDefault(); // Prevents the default button behavior
+                document.getElementById("form").addEventListener("submit",function(e) {
+                    e.preventDefault(); //prevents the default button behavior
                     const password = document.getElementById("password").value;
-                    const trn = document.getElementById("trn").value; // Change 'user' to 'username'
+                    const trn = document.getElementById("trn").value;
+                    const email = document.getElementById("email").value;  
 
-                    // Validate password length before attempting to login
+                    //validate password length before attempting to login
                     if (password.length < 8) {
                         alert("Password should be 8 or more characters");
                         return;
                     }
 
-                    // Storing the information in local storage
-                    localStorage.setItem("StoredUser", stringify(trn));
+                    //  storing the information in local storage
+                    localStorage.setItem("StoredUser", stringify(trn || email));
                     localStorage.setItem("StoredPassword", stringify(password));
+                
 
-                    // Retrieve stored values
+                    //retrieve stored values
                     const storedUser  = getitem("StoredUser");
                     const storedPassword = getitem("StoredPassword");
+                    
 
-                    // Check credentials
-                    if (storedUser  === defUsername && storedPassword === passkey) {
+                    //check credentials
+                    if ((storedUser  === defTrn || storedUser === defEmail)  && storedPassword === passkey) {
                         window.location.href = "grandeur.html";
                     } else {
                         fail_counter++;
-                        window.alert(`Incorrect login. You have 3 tries. Current try: ${fail_counter}`);
+                        window.alert(`Incorrect login. You have ${3 - fail_counter} tries left.`);
                         if (fail_counter >= 3) {
                             window.location.href = "errorpg.html";
                         }
                     }
-                };
+                });
 
+                //reset form inputs
                 function reset(){
                     document.getElementById("trn").value= "";
                     document.getElementById("email").value= "";

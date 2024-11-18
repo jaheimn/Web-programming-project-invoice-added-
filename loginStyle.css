@@ -125,6 +125,10 @@ body {
 	color: black;
 }
 
+#loginBtn :disabled{
+	background: none;
+	color: gray;
+}
 
 
 
