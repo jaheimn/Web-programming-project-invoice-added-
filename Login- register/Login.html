@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Login</title>
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'><link rel="stylesheet" href="loginStyle.css">
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2>Login</h2>
+        </div>
+        <form id="form" class="form">
+            <div class="form-control" id="trn_input">
+                <label for="trn">Enter a Valid TRN</label>
+                <input type="number" placeholder="(000-000-000)" id="trn" pattern="^\d{9}$" required maxlength="9"/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+                <button id="changeInput">Use email</button>
+            </div>
+            
+            <div class="form-control" id="email_input" style="display: none;">
+                <label for="email">Email</label>
+                <input type="email" placeholder="example@gmail.com" id="email" />
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+
+            <div class="form-control" id="password_input">
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password must be 8 charachters long" id="password" pattern=".{8,}" required/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+
+                <button id="loginBtn">Login</button>
+                <button id="reset" onclick="reset()">reset</button>
+        </form>    
+            
+            <script>
+
+                const defTrn = 123456789;
+                const passkey = "Password";
+
+                let fail_counter = 0;
+
+                // Functions to convert and revert inputs to strings
+                function stringify(item) {
+                    return JSON.stringify(item);
+                }
+
+                function getitem(item) {
+                    return JSON.parse(localStorage.getItem(item));
+                }
+
+
+               document.getElementById("changeInput").onclick = function useEmail(){
+                    document.getElementById("trn_input").style.display='none';
+                    document.getElementById("email_input").style.display='inline-block';
+                }
+
+
+                document.getElementById("loginBtn").onclick = function(e) {
+                    e.preventDefault(); // Prevents the default button behavior
+                    const password = document.getElementById("password").value;
+                    const trn = document.getElementById("trn").value; // Change 'user' to 'username'
+
+                    // Validate password length before attempting to login
+                    if (password.length < 8) {
+                        alert("Password should be 8 or more characters");
+                        return;
+                    }
+
+                    // Storing the information in local storage
+                    localStorage.setItem("StoredUser", stringify(trn));
+                    localStorage.setItem("StoredPassword", stringify(password));
+
+                    // Retrieve stored values
+                    const storedUser  = getitem("StoredUser");
+                    const storedPassword = getitem("StoredPassword");
+
+                    // Check credentials
+                    if (storedUser  === defUsername && storedPassword === passkey) {
+                        window.location.href = "grandeur.html";
+                    } else {
+                        fail_counter++;
+                        window.alert(`Incorrect login. You have 3 tries. Current try: ${fail_counter}`);
+                        if (fail_counter >= 3) {
+                            window.location.href = "errorpg.html";
+                        }
+                    }
+                };
+
+                function reset(){
+                    document.getElementById("trn").value= "";
+                    document.getElementById("email").value= "";
+                    document.getElementById("password").value= "";
+                }
+
+                 function retrieveData() {
+                    
+                    const name = localStorage.getItem('name');
+                    const email = localStorage.getItem('email');
+                    const password = localStorage.getItem('password');
+        
+                    if (name && email && password) {
+                        alert(`Name: ${name}\nEmail: ${email}\nPassword: ${password}`);
+                    } else {
+                        alert('You must Register');
+                    }
+                }
+                
+                function redirectToPage() {
+            event.preventDefault();
+            window.location.href = "grandeur.html";
+
+
+
+        }
+            </script>
+            <script  src="Registervalid.js"></script>
+            <script src="Loginattempts.js"></script>
+            
+    
+</body>
+</html>

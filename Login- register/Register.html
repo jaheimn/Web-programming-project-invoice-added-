@@ -2,14 +2,14 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>title</title>
+    <title>Register</title>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css'><link rel="stylesheet" href="loginStyle.css">
 
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h2>Login</h2>
+            <h2>Create Account</h2>
         </div>
         <form id="form" class="form">
             <div class="form-control">
@@ -33,31 +33,43 @@
                 <i class="fas fa-exclamation-circle"></i>
                 <small>Error message</small>
             </div>
-          
-                <button onclick="redirectToPage()" >Submit</button>
-            
+            <div class="form-control">
+                <label for="password2">Re-enter the same Password</label>
+                <input type="password" placeholder="Password must be 8 charachters long" id="password2" pattern=".{8,}" required/>
+                <i class="fas fa-check-circle"></i>
+                <i class="fas fa-exclamation-circle"></i>
+                <small>Error message</small>
+            </div>
+            <button onclick="redirectToPage()">Submit</button>
         </form>    
-            
             <script>
-                 function retrieveData() {
-                    
-                    const name = localStorage.getItem('name');
-                    const email = localStorage.getItem('email');
-                    const password = localStorage.getItem('password');
+                document.getElementById('form').addEventListener('submit', function(event) {
+                    event.preventDefault(); 
+    
+                    const name = document.getElementById('name');
+                    const email = document.getElementById('email');
+                    const password = document.getElementById('password');
+                    const form = document.getElementById("form");
         
-                    if (name && email && password) {
-                        alert(`Name: ${name}\nEmail: ${email}\nPassword: ${password}`);
-                    } else {
-                        alert('You must Register');
+                    
+                    localStorage.setItem('name', name);
+                    localStorage.setItem('email', email);
+                    localStorage.setItem('password', password);
+                    window.location.href = "index.html";
+
+                    function redirectToPage() {
+                    event.preventDefault();
+                    window.location.href = "index.html";
                     }
-                }
-                function redirectToPage() {
-            event.preventDefault();
-            window.location.href = "grandeur.html";
-        }
+        
+        
+                   
+                });
+        
             </script>
-            <script  src="Registervalid.js"></script>
-            <script src="Loginattempts.js"></script>
+           
+        
+            <script  src=".\Registervalid.js"></script>
             
     
 </body>
