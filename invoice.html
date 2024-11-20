@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Invoice - Grandeur</title>
+</head>
+<body style="background-image:url(assets/suit\ background.jpg);">
+    <header>
+        <h1>Invoice - Grandeur</h1>
+        <nav style="text-align: right;">
+        </nav>
+    </header>
+
+    <div class="invoice">
+        <h2>Invoice</h2>
+
+        <div class="cart-details">
+            <h3>Your Cart</h3>
+            <ul id="itemList">
+                            </ul>
+        </div>
+
+        <div class="cart-summary">
+            <p>Subtotal: <span id="subTot">$0.00</span></p>
+            <p>Tax (15%): <span id="tax">$0.00</span></p>
+            <p>Total: <span id="total">$0.00</span></p>
+        </div>
+
+        <div class="actions">
+            <button onclick="event.preventDefault(); window.location.href='grandeur.html'">Back to Store</button>
+            <button onclick="window.print()">Print Invoice</button>
+        </div>
+    </div>
+
+    <footer>
+        <a href="aboutus.html"><button class="about">About Us</button></a>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const itemList = document.getElementById('itemList');
+            const subTotElement = document.getElementById('subTot');
+            const taxElement = document.getElementById('tax');
+            const totalElement = document.getElementById('total');
+
+            let subtotal = 0;
+
+            // Display cart items
+            cart.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = `${item.name}: $${item.price} x ${item.quantity}`;
+                itemList.appendChild(li);
+                subtotal += item.price * item.quantity;
+            });
+
+            // Calculate totals
+            const taxRate = 0.15;
+            const tax = subtotal * taxRate;
+            const total = subtotal + tax;
+
+            // Update cart summary
+            subTotElement.textContent = `$${subtotal.toFixed(2)}`;
+            taxElement.textContent = `$${tax.toFixed(2)}`;
+            totalElement.textContent = `$${total.toFixed(2)}`;
+        });
+    </script>
+</body>
+</html>
