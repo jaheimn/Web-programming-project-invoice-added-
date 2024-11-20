@@ -1,11 +1,3 @@
-
-// Function to create new products (commented out as it is not used)
- /*function newProduct(id, type, price, name){
-    this.type = type;
-    this.price = price;
-    this.name = name;
-}*/
-
 let products = [
     { id: 1, type: "slim-Fit", price: 299.99, name: "Charcoal slim-fit suit" },
     { id: 2, type: "slim-Fit", price: 349.99, name: "Gray slim-fit suit" },
@@ -21,6 +13,14 @@ let products = [
 
 let cart = [];
 
+// Retrieve cart from localStorage on page load
+window.addEventListener('load', function() {
+    const storedCart = JSON.parse(localStorage.getItem('cart')) || []; // Retrieve cart data from localStorage
+    cart = storedCart;
+    addToCart(); // Update cart display on page load
+});
+
+// Function to update cart and display
 function addToCart() {
     const cartItems = document.getElementById('cartItems');
     cartItems.innerHTML = '';
@@ -42,7 +42,10 @@ function addToCart() {
     updateCartSummary();
 }
 
-const market = document.querySelector('.market');
+// Save cart to localStorage whenever cart is updated
+function saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(cart)); // Save cart array to localStorage
+}
 
 market.addEventListener('click', (e) => {
     if (e.target.classList.contains('addBtn')) {
@@ -59,18 +62,19 @@ market.addEventListener('click', (e) => {
 
         alert(`Added ${product.name} to cart.`);
         console.log(`Added ${product.name} to cart.`);
+        saveCartToLocalStorage(); // Save cart data to localStorage
         addToCart();
     }
 });
 
+// Show the cart when the "Cart" button is clicked
 const seeCart = document.getElementsByClassName('seeCart')[0];
 const cartDiv = document.getElementsByClassName('cart')[0];
-
-// Show the cart and the items added
 seeCart.addEventListener('click', function() {
     cartDiv.style.display = "block";
 });
 
+// Function to update the cart summary (subtotal, tax, total)
 function updateCartSummary() {
     let subTot = 0;
     let taxRate = 0.15;
@@ -99,7 +103,7 @@ function updateCartSummary() {
     totalAmt.textContent = `$${total.toFixed(2)}`; // Corrected total calculation
 }
 
-// Add event listener to update cart summary when "Add to cart" buttons are clicked
+// Update the cart summary when an item is added
 document.querySelectorAll('.addBtn').forEach(button => {
     button.addEventListener('click', updateCartSummary); // Pass the function reference
 });
